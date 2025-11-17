@@ -16,7 +16,7 @@ const SimilarEventsList = async ({ slug }: { slug: string }) => {
         similarEvents.map((item: IEvent) => {
           return (
             <li
-              className="md:w-1/6 w-full "
+              className="md:w-1/5 w-full "
               key={(item as IEvent & { _id: string })._id}
             >
               <EventCard {...item} />

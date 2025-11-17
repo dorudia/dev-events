@@ -8,6 +8,7 @@ export interface IEvent {
   date: string;
   time: string;
   description?: string;
+  featured?: boolean;
 }
 
 const EventSchema = new mongoose.Schema<IEvent>(
@@ -18,6 +19,8 @@ const EventSchema = new mongoose.Schema<IEvent>(
     location: { type: String, required: true },
     date: { type: String, required: true },
     time: { type: String, required: true },
+    description: { type: String, required: false }, // adăugat
+    featured: { type: Boolean, default: false },
   },
   {
     timestamps: true,

@@ -1,4 +1,3 @@
-import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,8 +8,17 @@ interface Props {
   location: string;
   date: string;
   time: string;
+  allEvents?: boolean;
 }
-const EventCard = ({ title, image, slug, location, date, time }: Props) => {
+const EventCard = ({
+  title,
+  image,
+  slug,
+  location,
+  date,
+  time,
+  allEvents,
+}: Props) => {
   return (
     <Link href={`/event/${slug}`} id="event-card">
       <Image
@@ -31,32 +39,34 @@ const EventCard = ({ title, image, slug, location, date, time }: Props) => {
         />
         <p>{location}</p>
       </div>
-      <p>{title}</p>
-      <div className="datetime">
-        <div>
-          <Image
-            src="/icons/calendar.svg"
-            alt="date"
-            width={14}
-            height={14}
-            style={{
-              width: "auto",
-              height: "auto",
-            }}
-          />
-          <p>{date}</p>
+      <p className="title">{title}</p>
+      {!allEvents && (
+        <div className="datetime">
+          <div>
+            <Image
+              src="/icons/calendar.svg"
+              alt="date"
+              width={14}
+              height={14}
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
+            />
+            <p>{date}</p>
+          </div>
+          <div>
+            <Image
+              src="/icons/clock.svg"
+              alt="time"
+              width={14}
+              height={14}
+              style={{ width: "auto", height: "auto" }}
+            />
+            <p>{time}</p>
+          </div>
         </div>
-        <div>
-          <Image
-            src="/icons/clock.svg"
-            alt="time"
-            width={14}
-            height={14}
-            style={{ width: "auto", height: "auto" }}
-          />
-          <p>{time}</p>
-        </div>
-      </div>
+      )}
     </Link>
   );
 };

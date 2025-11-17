@@ -14,7 +14,7 @@ const Navbar = () => {
 
           <Link href="/events">Events</Link>
 
-          <Link href="/events/create">Create Event</Link>
+          <Link href="/event/create">Create Event</Link>
         </ul>
       </nav>
     </header>

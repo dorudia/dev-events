@@ -41,14 +41,7 @@ const Event = async ({ par }: { par: Promise<string> }) => {
   return (
     <section id="event">
       <h1>{event.title}</h1>
-      <div className="header">
-        {event.description && (
-          <>
-            <h1>Event Descripton</h1>
-            <p className="mt-2">{event.description}</p>
-          </>
-        )}
-      </div>
+      <div className="header"></div>
       <div className="details">
         <div className="content">
           <Image
@@ -58,6 +51,12 @@ const Event = async ({ par }: { par: Promise<string> }) => {
             width={800}
             height={800}
           />
+          {event.description && (
+            <>
+              <h3>Event Descripton</h3>
+              <p>{event.description}</p>
+            </>
+          )}
           <section className="flex-col-gap-2">
             <h2>Event Details</h2>
             <EventDetailItem
@@ -77,6 +76,7 @@ const Event = async ({ par }: { par: Promise<string> }) => {
             />
           </section>
         </div>
+
         <aside className="booking">
           <p className="text-lg font-semibold mb-4">Book Event</p>
           <div className="signup-card">

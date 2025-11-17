@@ -2,8 +2,10 @@ import EventCard from "@/components/EventCard";
 import { IEvent } from "@/models/Event";
 // import { events } from "@/lib/constants";
 
-const EventsList = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/event`);
+const EventsList = async ({ allEvents }: { allEvents?: boolean }) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/event`, {
+    next: { revalidate: 3 },
+  });
 
   if (!res.ok) {
     const text = await res.text();
@@ -14,12 +16,16 @@ const EventsList = async () => {
 
   const events = await res.json();
 
+  const displayedEvents = allEvents
+    ? events
+    : events.filter((el: any) => el.featured).slice(0, 6);
+
   return (
     <>
       {events &&
         events.length > 0 &&
-        events.map((item: IEvent) => (
-          <EventCard key={item.slug} {...item} />
+        displayedEvents.map((item: IEvent) => (
+          <EventCard key={item.slug} {...item} allEvents={allEvents} />
           // <EventCard key={(item as IEvent & { _id: string })._id} {...item} />
         ))}
     </>

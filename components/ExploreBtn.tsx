@@ -10,7 +10,7 @@ const ExploreBtn = () => {
       className="mt-7 mx-auto mb-6"
       onClick={() => console.log("CLICK")}
     >
-      <a href="#events">
+      <a href="/events">
         ExploreBtn
         <Image
           src="/icons/arrow-down.svg"
