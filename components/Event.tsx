@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import BookEvent from "./BookEvent";
 import SimilarEventsList from "./SimilarEventsList";
 import { notFound } from "next/navigation";
+import { cacheLife } from "next/cache";
 
 const EventDetailItem = ({
   icon,
@@ -25,7 +26,12 @@ const EventDetailItem = ({
   </div>
 );
 
-const Event = async ({ slug }: { slug: string }) => {
+const Event = async ({ par }: { par: Promise<string> }) => {
+  "use cache";
+  cacheLife("minutes");
+
+  const slug = await par;
+
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/event/${slug}`
   );

@@ -1,22 +1,17 @@
 import { Suspense } from "react";
 import Event from "@/components/Event";
 import { notFound } from "next/navigation";
-import { log } from "console";
 
-const EventDetaisPage = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
+// prettier-ignore
+const EventDetaisPage = async ({ params }: { params: Promise<{ slug: string }>}) => {
   const slug = params.then((result) => {
-    log({ result });
+    console.log("RESULT>SLUG", result.slug);
     return result.slug;
   });
   return (
     <main>
       <Suspense fallback={<div>Loading event details...</div>}>
-        // @ts-ignore
-        <Event params={slug} />
+        <Event par={slug} />   
       </Suspense>
     </main>
   );
