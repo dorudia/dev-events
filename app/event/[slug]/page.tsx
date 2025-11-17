@@ -1,5 +1,6 @@
 import BookEvent from "@/components/BookEvent";
 import EventCard from "@/components/EventCard";
+import SimilarEventsList from "@/components/SimilarEventsList";
 import { getBookingsByEmail } from "@/lib/actions/booking.actions";
 import { getSimilarEvents } from "@/lib/actions/event.actions";
 import { IEvent } from "@/models/Event";
@@ -40,7 +41,7 @@ const EventDetailItem = ({
 
 const EventDetaisPage = async ({ params }: PageProps) => {
   "use cache";
-  cacheLife("seconds");
+  cacheLife({ revalidate: 60 }); // Revalidate every 60 seconds
   const { slug } = await params;
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/event/${slug}`
@@ -50,10 +51,6 @@ const EventDetaisPage = async ({ params }: PageProps) => {
 
   if (!event) return notFound();
 
-  const similarEvents: any = await getSimilarEvents(slug);
-  console.log({ similarEvents });
-
-  if (!event) return notFound();
   return (
     <section id="event">
       <h1>{event.title}</h1>
@@ -104,17 +101,9 @@ const EventDetaisPage = async ({ params }: PageProps) => {
       <div className="flex w-full flex-col gap-4 pt-20">
         <h2>Similar Events</h2>
         <ul className="list-none flex flex-direction-row flex-wrap gap-4 mb-4">
-          {similarEvents.length > 0 &&
-            similarEvents.map((item: IEvent) => {
-              return (
-                <li
-                  className="w-1/6"
-                  key={(item as IEvent & { _id: string })._id}
-                >
-                  <EventCard {...item} />
-                </li>
-              );
-            })}
+          <Suspense fallback={<div>Loading similar events...</div>}>
+            <SimilarEventsList slug={slug} />
+          </Suspense>
         </ul>
       </div>
     </section>
