@@ -1,14 +1,20 @@
-import { title } from "process";
-
-let arr: any = [];
-
 export async function GET() {
-  return new Response(JSON.stringify(arr));
+  const html = `
+    <html>
+      <head><title>Hello</title></head>
+      <body >
+        <h1 style="color: blue; text-align: center; margin-top: 50px">Hello World!</h1>
+        <h2 style="font-weight: normal; text-align: center" >Acesta este un raspuns HTML din API route.</h2>
+      </body>
+    </html>
+  `;
+
+  return new Response(html, {
+    status: 200,
+    headers: { "Content-Type": "text/html" },
+  });
 }
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  arr.push(body);
-  console.log({ arr });
-  return new Response(JSON.stringify(body));
-}
+// export async function GET() {
+//   return Response.json({ message: "Hello from Test API Route..." });
+// }
