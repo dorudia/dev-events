@@ -1,13 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import {
+  createBooking,
+  getBookingsByEmail,
+} from "@/lib/actions/booking.actions";
+import { get } from "http";
+import { useEffect, useState } from "react";
 
-const BookEvent = () => {
+const BookEvent = ({ eventId, slug }: { eventId: string; slug: string }) => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // const bookings = getBookingsByEmail(email);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    console.log(typeof eventId, typeof slug, typeof email);
+    try {
+      await createBooking({ eventId, slug, email });
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+    }
+
     // Here you can handle the form submission, e.g., send the email to your server
     console.log("Email submitted:", email);
     setSubmitted(true);

@@ -1,13 +1,15 @@
 import BookEvent from "@/components/BookEvent";
 import EventCard from "@/components/EventCard";
+import { getBookingsByEmail } from "@/lib/actions/booking.actions";
 import { getSimilarEvents } from "@/lib/actions/event.actions";
 import { IEvent } from "@/models/Event";
 import { log } from "console";
 import { get } from "http";
 import { Book } from "lucide-react";
+import { cacheLife } from "next/cache";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import React from "react";
+import React, { cache, Suspense } from "react";
 
 interface PageProps {
   params: {
@@ -37,6 +39,8 @@ const EventDetailItem = ({
 );
 
 const EventDetaisPage = async ({ params }: PageProps) => {
+  "use cache";
+  cacheLife("seconds");
   const { slug } = await params;
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/event/${slug}`
@@ -93,17 +97,20 @@ const EventDetaisPage = async ({ params }: PageProps) => {
           <p className="text-lg font-semibold mb-4">Book Event</p>
           <div className="signup-card">
             <h2>Book your spot</h2>
-            <BookEvent />
+            <BookEvent eventId={event._id} slug={event.slug} />
           </div>
         </aside>
       </div>
       <div className="flex w-full flex-col gap-4 pt-20">
         <h2>Similar Events</h2>
-        <ul className="list-none flex flex-direction-row row-wrap gap-4 mb-4">
+        <ul className="list-none flex flex-direction-row flex-wrap gap-4 mb-4">
           {similarEvents.length > 0 &&
             similarEvents.map((item: IEvent) => {
               return (
-                <li key={(item as IEvent & { _id: string })._id}>
+                <li
+                  className="w-1/6"
+                  key={(item as IEvent & { _id: string })._id}
+                >
                   <EventCard {...item} />
                 </li>
               );
