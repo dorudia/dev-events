@@ -1,23 +1,24 @@
 import { Suspense } from "react";
 import Event from "@/components/Event";
 import { notFound } from "next/navigation";
+import { log } from "console";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-const EventDetaisPage = async ({ params }: PageProps) => {
-  const { slug } = await params;
-
-  if (!slug) return notFound();
-
-  // 2️⃣ Suspense pentru încărcarea componentei Event
+const EventDetaisPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const slug = params.then((result) => {
+    log({ result });
+    return result.slug;
+  });
   return (
-    <Suspense fallback={<div>Loading event details...</div>}>
-      <Event slug={slug} />
-    </Suspense>
+    <main>
+      <Suspense fallback={<div>Loading event details...</div>}>
+        // @ts-ignore
+        <Event params={slug} />
+      </Suspense>
+    </main>
   );
 };
 

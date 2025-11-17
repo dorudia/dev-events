@@ -8,6 +8,8 @@ import { Suspense } from "react";
 // import { events } from "@/lib/constants";
 
 const Page = async () => {
+  "use cache";
+  cacheLife("minutes");
   return (
     <section>
       <h1 className="text-center">
