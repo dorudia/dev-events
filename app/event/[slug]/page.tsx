@@ -39,8 +39,6 @@ const EventDetailItem = ({
   </div>
 );
 
-export const dynamic = "force-dynamic";
-
 const EventDetaisPage = async ({ params }: PageProps) => {
   "use cache";
   cacheLife({ revalidate: 60 }); // Revalidate every 60 seconds
