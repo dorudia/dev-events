@@ -7,7 +7,7 @@ const Navbar = () => {
       <nav>
         <Link href="/" className="flex">
           <Image src="/icons/logo.png" alt="Logo" width={24} height={24} />
-          <p>DevEvent</p>
+          <p className="hidden md:inline">DevEvent</p>
         </Link>
         <ul>
           <Link href="/">Home</Link>
