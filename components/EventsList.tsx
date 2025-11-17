@@ -8,6 +8,7 @@ const EventsList = async () => {
   if (!res.ok) {
     const text = await res.text();
     console.error("Failed to fetch events:", text);
+
     return <p>Failed to load events.</p>;
   }
 
