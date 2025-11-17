@@ -6,6 +6,10 @@ import EventCard from "./EventCard";
 const SimilarEventsList = async ({ slug }: { slug: string }) => {
   const similarEvents: any = await getSimilarEvents(slug);
   console.log({ similarEvents });
+
+  if (!similarEvents || similarEvents.length === 0)
+    return <p>No similar events found.</p>;
+
   return (
     <>
       {similarEvents.length > 0 &&

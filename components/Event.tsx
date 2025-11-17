@@ -27,7 +27,8 @@ const EventDetailItem = ({
 
 const Event = async ({ slug }: { slug: string }) => {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/event/${slug}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/event/${slug}`,
+    { cache: "no-store" }
   );
   const { event } = await data.json();
   if (!event) return notFound();
