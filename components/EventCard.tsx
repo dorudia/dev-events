@@ -1,3 +1,4 @@
+import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,6 +11,8 @@ interface Props {
   time: string;
 }
 const EventCard = ({ title, image, slug, location, date, time }: Props) => {
+  "use cache";
+  cacheLife("seconds");
   return (
     <Link href={`/event/${slug}`} id="event-card">
       <Image
