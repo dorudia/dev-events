@@ -6,6 +6,7 @@ import { useAuth } from "@clerk/nextjs";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 const CreateEvent = () => {
+  const [submitting, setSubmitting] = useState(false);
   const { isSignedIn } = useAuth();
   const router = useRouter();
 
@@ -18,8 +19,6 @@ const CreateEvent = () => {
       </div>
     );
   }
-
-  const [submitting, setSubmitting] = useState(false);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
