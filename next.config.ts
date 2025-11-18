@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   cacheComponents: true,
+  cacheLife: {
+    myCustomProfile: {
+      stale: 300, // cât timp client‑ul poate folosi cache fără verificare
+      revalidate: 600, // cât des regenera cache pe server în fundal
+      expire: 3600, // după cât timp cache-ul expiră complet
+    },
+  },
   images: {
     remotePatterns: [
       {

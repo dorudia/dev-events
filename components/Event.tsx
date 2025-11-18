@@ -28,9 +28,7 @@ const EventDetailItem = ({
 
 const Event = async ({ par }: { par: Promise<string> }) => {
   "use cache";
-  next: {
-    revalidate: 60;
-  }
+  cacheLife("minutes");
 
   const slug = await par;
 
