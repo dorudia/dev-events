@@ -2,12 +2,12 @@ import { getSimilarEvents } from "@/lib/actions/event.actions";
 import { IEvent } from "@/models/Event";
 import React from "react";
 import EventCard from "./EventCard";
+import { cacheLife } from "next/cache";
 
 const SimilarEventsList = async ({ slug }: { slug: string }) => {
   "use cache";
-  next: {
-    revalidate: 60;
-  }
+  cacheLife("minutes");
+
   const similarEvents: any = await getSimilarEvents(slug);
   console.log({ similarEvents });
 
