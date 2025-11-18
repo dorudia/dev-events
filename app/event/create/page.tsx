@@ -41,9 +41,9 @@ const CreateEvent = () => {
       console.log("API RESPONSE:", result);
 
       if (res.ok) {
-        alert("Event created successfully!");
         form.reset();
         router.push("/events");
+        router.refresh();
       } else {
         alert(result.error || "Failed to create event");
       }

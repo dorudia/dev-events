@@ -21,15 +21,19 @@ const EventCard = ({
 }: Props) => {
   return (
     <Link href={`/event/${slug}`} id="event-card">
-      <Image
-        src={image}
-        alt={title}
-        width={410}
-        height={300}
-        className="poster"
-        style={{ width: "auto", height: "auto" }}
-      />
-      <div className="flex flex-row gap-2">
+      <div
+        className="w-full relative overflow-hidden rounded-md mb-2"
+        style={{ aspectRatio: "3/2" }}
+      >
+        <Image
+          src={image}
+          alt={title}
+          fill
+          // className="poster"
+          style={{ objectFit: "cover", width: "100%", height: "100%" }}
+        />
+      </div>
+      <div className="flex flex-row gap-2 w-full">
         <Image
           src="/icons/pin.svg"
           alt="location"
