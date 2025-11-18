@@ -26,6 +26,8 @@ const EventDetailItem = ({
   </div>
 );
 
+export const dynamic = "force-dynamic";
+
 const Event = async ({ par }: { par: Promise<string> }) => {
   "use cache";
   cacheLife("minutes");
