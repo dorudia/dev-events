@@ -3,20 +3,21 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const CreateEvent = () => {
-  //   const { isSignedIn } = useAuth();
+  const { isSignedIn } = useAuth();
   const router = useRouter();
 
-  //   if (!isSignedIn) {
-  //     return (
-  //       <div className="text-center mt-10">
-  //         <h2 className="text-2xl font-semibold mb-4 text-amber-500">
-  //           Please Sign In to create an event.
-  //         </h2>
-  //       </div>
-  //     );
-  //   }
+  if (!isSignedIn) {
+    return (
+      <div className="text-center mt-10">
+        <h2 className="text-2xl font-semibold mb-4 text-amber-500">
+          Please Sign In to create an event.
+        </h2>
+      </div>
+    );
+  }
 
   const [submitting, setSubmitting] = useState(false);
 

@@ -32,21 +32,21 @@ const Navbar = () => {
             <Link href="/event/create">Create Event</Link>
           </ul>
           <div>
-            {/* <SignedOut>
+            <SignedOut>
               <SignInButton>
                 <button className="bg-[#836be3] text-ceramic-white rounded-sm font-medium text-sm sm:text-base px-4 py-1 ml-3 sm:px-5 cursor-pointer">
                   Sign in
                 </button>
-              </SignInButton> */}
-            {/* <SignUpButton>
+              </SignInButton>
+              {/* <SignUpButton>
                 <button className="bg-[#836be3] text-ceramic-white rounded-sm font-medium text-sm sm:text-base px-4 py-1 ml-3 sm:px-5 cursor-pointer">
                   Sign Up
                 </button>
               </SignUpButton> */}
-            {/* </SignedOut>
+            </SignedOut>
             <SignedIn>
               <UserButton />
-            </SignedIn> */}
+            </SignedIn>
           </div>
         </div>
       </nav>
