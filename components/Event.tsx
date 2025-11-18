@@ -44,21 +44,13 @@ const Event = async ({ par }: { par: Promise<string> }) => {
       <div className="header"></div>
       <div className="details">
         <div className="content">
-          <Suspense
-            fallback={
-              <div>
-                <p className="text-amber-100">Loading image ...</p>
-              </div>
-            }
-          >
-            <Image
-              className="banner"
-              src={event.image}
-              alt="event poster"
-              width={800}
-              height={800}
-            />
-          </Suspense>
+          <Image
+            className="banner"
+            src={event.image}
+            alt="event poster"
+            width={800}
+            height={800}
+          />
           {event.description && (
             <>
               <h3>Event Descripton</h3>
