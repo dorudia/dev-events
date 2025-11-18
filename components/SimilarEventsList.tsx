@@ -4,6 +4,10 @@ import React from "react";
 import EventCard from "./EventCard";
 
 const SimilarEventsList = async ({ slug }: { slug: string }) => {
+  "use cache";
+  next: {
+    revalidate: 60;
+  }
   const similarEvents: any = await getSimilarEvents(slug);
   console.log({ similarEvents });
 
